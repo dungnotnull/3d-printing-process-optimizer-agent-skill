@@ -1,4 +1,4 @@
-﻿# 3D Printing Process Optimizer — Agent Skill
+# 3D Printing Process Optimizer — Agent Skill
 
 <div align="center">
 
