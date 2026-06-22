@@ -1,0 +1,21 @@
+{
+  "status": "needs_input",
+  "final_orientation": null,
+  "support_strategy": null,
+  "parameter_set": null,
+  "actions": [
+    {
+      "id": "S4-A1",
+      "action": "Confirm process (SLA/DLP vs FDM) and material class",
+      "effort": "Low",
+      "impact": "High",
+      "priority": 3,
+      "framework": "ISO/ASTM 52900",
+      "verification": "User selects process and material"
+    }
+  ],
+  "test_print_plan": null,
+  "overall_effort": "Low",
+  "overall_impact": "High",
+  "evidence_links": []
+}

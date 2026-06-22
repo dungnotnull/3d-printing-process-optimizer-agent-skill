@@ -1,0 +1,31 @@
+{
+  "status": "ok",
+  "process": "FDM",
+  "supported": true,
+  "material_class": "PETG",
+  "geometry_summary": {
+    "max_dimensions_mm": [120, 80, 5],
+    "overhang_angles_deg": [],
+    "bridges_mm": [],
+    "thin_walls_mm": [],
+    "load_direction": "unknown",
+    "critical_surfaces": ["flat base"],
+    "warp_risk": "high"
+  },
+  "target_properties": {
+    "strength_direction": null,
+    "surface_finish": null,
+    "dimensional_accuracy": null,
+    "print_time": null,
+    "cost": null
+  },
+  "printer_constraints": {},
+  "failure_symptoms": ["warping"],
+  "dominant_framework": "Process-parameter mapping per polymer class",
+  "secondary_frameworks": ["DfAM"],
+  "missing_inputs": ["current bed temp", "fan speed"],
+  "evidence_links": [
+    {"claim": "Flat large PETG base has high warp risk", "source": "Process-parameter mapping per polymer class", "tier": 4}
+  ],
+  "confidence": 0.70
+}

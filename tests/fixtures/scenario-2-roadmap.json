@@ -1,0 +1,60 @@
+{
+  "status": "ok",
+  "final_orientation": {
+    "name": "Reorient 20° tilt",
+    "rotation": {"x_deg": 20, "y_deg": 0, "z_deg": 0},
+    "rationale": "Tilting reduces the 70° overhang to a manageable angle, lowering support cost.",
+    "framework": "Overhang/bridging 45-degree rule"
+  },
+  "support_strategy": {
+    "threshold_deg": 45,
+    "density_percent": 15,
+    "interface": true,
+    "removal_plan": "Remove supports from accessible side; expect 8 min.",
+    "framework": "Overhang/bridging 45-degree rule"
+  },
+  "parameter_set": {
+    "layer_height_mm": 0.20,
+    "wall_count": 3,
+    "top_bottom_layers": 4,
+    "infill_percent": 20,
+    "nozzle_temp_c": 205,
+    "bed_temp_c": 60,
+    "fan_speed_percent": 100,
+    "print_speed_mm_s": 60,
+    "retraction_distance_mm": 0.8,
+    "retraction_speed_mm_s": 40,
+    "special_notes": ["Add cooling towers for 12 mm bridge"]
+  },
+  "actions": [
+    {
+      "id": "S2-A1",
+      "action": "Tilt part 20° to reduce overhang severity",
+      "effort": "Low",
+      "impact": "High",
+      "priority": 3,
+      "framework": "Overhang/bridging 45-degree rule",
+      "verification": "No unsupported red regions in slicer preview"
+    },
+    {
+      "id": "S2-A2",
+      "action": "Set support threshold 45° and density 15% with interface",
+      "effort": "Low",
+      "impact": "High",
+      "priority": 3,
+      "framework": "Overhang/bridging 45-degree rule",
+      "verification": "Support detaches cleanly leaving surface Ra < 50 µm"
+    }
+  ],
+  "test_print_plan": {
+    "model": "Sacrificial small section of the overhang",
+    "measurements": ["overhang surface quality", "support removal time", "bridge sag"],
+    "acceptance": {"bridge_sag_mm": 0.3, "support_time_min": 10, "surface_roughness_ra_um": 50},
+    "fallback": "If bridge sags > 0.3 mm, add 2 cooling towers and reduce bridge speed to 25 mm/s"
+  },
+  "overall_effort": "Low",
+  "overall_impact": "High",
+  "evidence_links": [
+    {"claim": "45° threshold for PLA supports", "source": "Slic3r/PrusaSlicer docs", "tier": 4}
+  ]
+}

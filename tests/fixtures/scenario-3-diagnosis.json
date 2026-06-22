@@ -1,0 +1,57 @@
+{
+  "status": "ok",
+  "symptoms": ["warping"],
+  "matched_failure_modes": [
+    {
+      "symptom": "warping",
+      "mode": "thermal_warp_corner_lift",
+      "mechanism": "Differential cooling and contraction exceed bed-adhesion strength; corners lift first.",
+      "framework": "Process-parameter mapping per polymer class",
+      "evidence_tier": 4,
+      "sources": ["Prusa PETG guide"]
+    }
+  ],
+  "parameter_adjustments": [
+    {
+      "id": "S3-ADJ1",
+      "parameter": "bed_temp_c",
+      "current": 70,
+      "recommended": 85,
+      "delta": "+15",
+      "rationale": "Higher bed temperature improves PETG bed adhesion and reduces thermal gradient.",
+      "framework": "Process-parameter mapping per polymer class",
+      "confidence": "high",
+      "failure_mode": "thermal_warp_corner_lift",
+      "side_effects": ["Longer cool-down time"]
+    },
+    {
+      "id": "S3-ADJ2",
+      "parameter": "fan_speed_percent",
+      "current": 80,
+      "recommended": 30,
+      "delta": "-50 for first 5 layers",
+      "rationale": "High part cooling on PETG early layers increases corner warping.",
+      "framework": "Process-parameter mapping per polymer class",
+      "confidence": "high",
+      "failure_mode": "thermal_warp_corner_lift",
+      "side_effects": ["Slightly reduced bridging performance"]
+    },
+    {
+      "id": "S3-ADJ3",
+      "parameter": "brim_width_mm",
+      "current": 0,
+      "recommended": 8,
+      "delta": "+8",
+      "rationale": "Brim increases adhesion footprint and resists corner lift.",
+      "framework": "Process-parameter mapping per polymer class",
+      "confidence": "medium",
+      "failure_mode": "thermal_warp_corner_lift",
+      "side_effects": ["Requires post-print trimming"]
+    }
+  ],
+  "unmapped_symptoms": [],
+  "evidence_links": [
+    {"claim": "PETG warps with high early-layer cooling", "source": "Prusa PETG guide", "tier": 4, "url": "https://help.prusa3d.com/article/petg_1159"}
+  ],
+  "confidence": 0.80
+}

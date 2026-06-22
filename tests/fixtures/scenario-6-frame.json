@@ -1,0 +1,31 @@
+{
+  "status": "ok",
+  "process": "FDM",
+  "supported": true,
+  "material_class": "PLA",
+  "geometry_summary": {
+    "max_dimensions_mm": [80, 50, 30],
+    "overhang_angles_deg": [45],
+    "bridges_mm": [],
+    "thin_walls_mm": [],
+    "load_direction": "unknown",
+    "critical_surfaces": ["top surface"],
+    "warp_risk": "low"
+  },
+  "target_properties": {
+    "strength_direction": null,
+    "surface_finish": "functional",
+    "dimensional_accuracy": null,
+    "print_time": null,
+    "cost": null
+  },
+  "printer_constraints": {},
+  "failure_symptoms": ["stringing", "poor_surface"],
+  "dominant_framework": "Process-parameter mapping per polymer class",
+  "secondary_frameworks": ["DfAM"],
+  "missing_inputs": ["current retraction settings", "nozzle temperature", "layer height"],
+  "evidence_links": [
+    {"claim": "PLA stringing tied to retraction and temperature", "source": "Process-parameter mapping per polymer class", "tier": 4}
+  ],
+  "confidence": 0.65
+}

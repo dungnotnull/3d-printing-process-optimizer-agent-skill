@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "candidates": [
+    {
+      "name": "Z-up flat",
+      "rotation": {"x_deg": 0, "y_deg": 0, "z_deg": 0},
+      "scores": {
+        "orientation_strength": {"value": 0.50, "framework": "Anisotropy & layer-adhesion mechanics", "evidence": "No primary load direction"},
+        "support_cost": {"value": 1.0, "framework": "Overhang/bridging 45-degree rule", "evidence": "No supports needed"},
+        "surface_finish": {"value": 0.60, "framework": "DfAM + Process-parameter mapping", "evidence": "Top surface in XY"},
+        "printability": {"value": 0.45, "framework": "Process-parameter mapping per polymer class", "evidence": "High warp risk on flat base"},
+        "parameter_confidence": {"value": 0.50, "framework": "Taguchi DOE", "evidence": "Generic PETG profile"}
+      },
+      "aggregate": 0.64
+    }
+  ],
+  "recommended_candidate": "Z-up flat",
+  "weights": {"orientation_strength": 0.15, "support_cost": 0.15, "surface_finish": 0.15, "printability": 0.40, "parameter_confidence": 0.15},
+  "parameter_recommendations": {
+    "layer_height_mm": 0.20,
+    "wall_count": 3,
+    "top_bottom_layers": 4,
+    "infill_percent": 20,
+    "nozzle_temp_c": 240,
+    "bed_temp_c": 80,
+    "fan_speed_percent": 50,
+    "print_speed_mm_s": 45,
+    "retraction_distance_mm": 1.5,
+    "retraction_speed_mm_s": 35,
+    "special_notes": ["Use 8 mm brim", "Dry filament"]
+  },
+  "scope_disclaimer": null,
+  "evidence_links": [
+    {"claim": "PETG flat bases warp without brim", "source": "Prusa PETG guide", "tier": 4}
+  ]
+}

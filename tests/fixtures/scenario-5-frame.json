@@ -1,0 +1,39 @@
+{
+  "status": "ok",
+  "process": "DMLS",
+  "supported": true,
+  "material_class": "Ti6Al4V",
+  "geometry_summary": {
+    "max_dimensions_mm": [120, 60, 25],
+    "overhang_angles_deg": [35, 50],
+    "bridges_mm": [],
+    "thin_walls_mm": [0.6],
+    "load_direction": "xy",
+    "critical_surfaces": ["fatigue-critical faces"],
+    "warp_risk": "high"
+  },
+  "target_properties": {
+    "strength_direction": "xy",
+    "surface_finish": null,
+    "dimensional_accuracy": "tight",
+    "print_time": null,
+    "cost": null
+  },
+  "printer_constraints": {
+    "build_volume_mm": [250, 250, 300],
+    "laser_spot_um": 70,
+    "heated_bed": false,
+    "heated_chamber": true,
+    "inert_atmosphere": true
+  },
+  "failure_symptoms": [],
+  "dominant_framework": "Anisotropy & layer-adhesion mechanics",
+  "secondary_frameworks": ["Process-parameter mapping per metal class", "ISO/ASTM 52900", "Taguchi DOE"],
+  "missing_inputs": ["fatigue load magnitude", "required surface roughness", "post-process plan"],
+  "evidence_links": [
+    {"claim": "Ti6Al4V DMLS has anisotropic fatigue behavior", "source": "DebRoy et al. residual stress review", "tier": 2},
+    {"claim": "Thin walls < 0.8 mm risk distortion in DMLS", "source": "EOS DMLS design guide", "tier": 4}
+  ],
+  "confidence": 0.65,
+  "regulatory_note": "Flight-critical aerospace part: requires qualified human design review before production."
+}

@@ -1,0 +1,71 @@
+{
+  "status": "ok",
+  "final_orientation": {
+    "name": "Z-up flat",
+    "rotation": {"x_deg": 0, "y_deg": 0, "z_deg": 0},
+    "rationale": "Keeps load in XY plane for best layer adhesion strength per Anisotropy framework.",
+    "framework": "Anisotropy & layer-adhesion mechanics"
+  },
+  "support_strategy": {
+    "threshold_deg": 50,
+    "density_percent": 15,
+    "interface": true,
+    "removal_plan": "Flush cutters + needle-nose pliers; expect 5 min support removal.",
+    "framework": "Overhang/bridging 45-degree rule"
+  },
+  "parameter_set": {
+    "layer_height_mm": 0.20,
+    "wall_count": 3,
+    "top_bottom_layers": 4,
+    "infill_percent": 40,
+    "infill_pattern": "gyroid",
+    "nozzle_temp_c": 240,
+    "bed_temp_c": 80,
+    "fan_speed_percent": 40,
+    "print_speed_mm_s": 50,
+    "retraction_distance_mm": 1.5,
+    "retraction_speed_mm_s": 35,
+    "special_notes": ["Dry PETG before printing"]
+  },
+  "actions": [
+    {
+      "id": "S1-A1",
+      "action": "Print Z-up flat with 50° support threshold and 15% support density",
+      "effort": "Low",
+      "impact": "High",
+      "priority": 3,
+      "framework": "Overhang/bridging 45-degree rule",
+      "verification": "Overhang surface roughness < Ra 50 µm; supports detach cleanly"
+    },
+    {
+      "id": "S1-A2",
+      "action": "Dry PETG and use bed temp 80 °C for adhesion",
+      "effort": "Low",
+      "impact": "Medium",
+      "priority": 2,
+      "framework": "Process-parameter mapping per polymer class",
+      "verification": "No corner lift in first 20 mm of print"
+    },
+    {
+      "id": "S1-A3",
+      "action": "Run a 2-level Taguchi DOE (temperature × speed) to lock final parameters",
+      "effort": "High",
+      "impact": "Medium",
+      "priority": 6,
+      "framework": "Taguchi DOE",
+      "verification": "Select parameter set with highest tensile strength SN ratio"
+    }
+  ],
+  "test_print_plan": {
+    "model": "Scaled 50% version or sacrificial coupon",
+    "measurements": ["corner lift", "layer adhesion sound", "support removal time", "surface roughness"],
+    "acceptance": {"corner_lift_mm": 0.2, "support_time_min": 10, "surface_roughness_ra_um": 50},
+    "fallback": "If corner lift > 0.2 mm, add 8 mm brim and reduce first-layer fan to 0%"
+  },
+  "overall_effort": "Medium",
+  "overall_impact": "High",
+  "evidence_links": [
+    {"claim": "Z-up aligns XY strength with load", "source": "Anisotropy & layer-adhesion mechanics", "tier": 5},
+    {"claim": "PETG bed temp 80 °C recommended", "source": "Prusa PETG guide", "tier": 4, "url": "https://help.prusa3d.com/article/petg_1159"}
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "status": "ok",
+  "candidates": [
+    {
+      "name": "Reorient 20° tilt",
+      "rotation": {"x_deg": 20, "y_deg": 0, "z_deg": 0},
+      "scores": {
+        "orientation_strength": {"value": 0.60, "framework": "Anisotropy & layer-adhesion mechanics", "evidence": "Mixed layer orientation"},
+        "support_cost": {"value": 0.75, "framework": "Overhang/bridging 45-degree rule", "evidence": "Tilt reduces overhang severity"},
+        "surface_finish": {"value": 0.65, "framework": "DfAM + Process-parameter mapping", "evidence": "Functional finish acceptable"},
+        "printability": {"value": 0.80, "framework": "Process-parameter mapping per polymer class", "evidence": "PLA is forgiving"},
+        "parameter_confidence": {"value": 0.55, "framework": "Taguchi DOE", "evidence": "No part-specific DOE"}
+      },
+      "aggregate": 0.68
+    }
+  ],
+  "recommended_candidate": "Reorient 20° tilt",
+  "weights": {"orientation_strength": 0.20, "support_cost": 0.30, "surface_finish": 0.25, "printability": 0.15, "parameter_confidence": 0.10},
+  "parameter_recommendations": {
+    "layer_height_mm": 0.20,
+    "wall_count": 3,
+    "top_bottom_layers": 4,
+    "infill_percent": 20,
+    "nozzle_temp_c": 205,
+    "bed_temp_c": 60,
+    "fan_speed_percent": 100,
+    "print_speed_mm_s": 60,
+    "support_threshold_deg": 45,
+    "support_density_percent": 15,
+    "support_interface": true,
+    "retraction_distance_mm": 0.8,
+    "retraction_speed_mm_s": 40,
+    "special_notes": ["Bridge 12 mm may need 1-2 cooling towers"]
+  },
+  "scope_disclaimer": null,
+  "evidence_links": [
+    {"claim": "45° support threshold for clean PLA supports", "source": "Slic3r/PrusaSlicer docs", "tier": 4}
+  ]
+}

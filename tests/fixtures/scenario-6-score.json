@@ -1,0 +1,39 @@
+{
+  "status": "ok",
+  "candidates": [
+    {
+      "name": "Z-up flat",
+      "rotation": {"x_deg": 0, "y_deg": 0, "z_deg": 0},
+      "scores": {
+        "orientation_strength": {"value": 0.50, "framework": "Anisotropy & layer-adhesion mechanics", "evidence": "No primary load"},
+        "support_cost": {"value": 0.85, "framework": "Overhang/bridging 45-degree rule", "evidence": "45° self-supporting"},
+        "surface_finish": {"value": 0.50, "framework": "DfAM + Process-parameter mapping", "evidence": "Top surface quality depends on layer height and cooling"},
+        "printability": {"value": 0.60, "framework": "Process-parameter mapping per polymer class", "evidence": "Stringing and surface issues lower printability"},
+        "parameter_confidence": {"value": 0.40, "framework": "Taguchi DOE", "evidence": "No DOE completed"}
+      },
+      "aggregate": 0.58
+    }
+  ],
+  "recommended_candidate": "Z-up flat",
+  "weights": {"orientation_strength": 0.15, "support_cost": 0.15, "surface_finish": 0.30, "printability": 0.30, "parameter_confidence": 0.10},
+  "parameter_recommendations": {
+    "layer_height_mm": 0.20,
+    "wall_count": 3,
+    "top_bottom_layers": 4,
+    "infill_percent": 20,
+    "nozzle_temp_c": 200,
+    "bed_temp_c": 60,
+    "fan_speed_percent": 100,
+    "print_speed_mm_s": 50,
+    "support_threshold_deg": 50,
+    "support_density_percent": 0,
+    "support_interface": false,
+    "retraction_distance_mm": 1.0,
+    "retraction_speed_mm_s": 45,
+    "special_notes": ["Dry PLA if stored open"]
+  },
+  "scope_disclaimer": null,
+  "evidence_links": [
+    {"claim": "PLA stringing reduced by faster retraction", "source": "Prusa PLA guide", "tier": 4}
+  ]
+}

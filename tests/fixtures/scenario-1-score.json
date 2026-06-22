@@ -1,0 +1,58 @@
+{
+  "status": "ok",
+  "candidates": [
+    {
+      "name": "Z-up flat",
+      "rotation": {"x_deg": 0, "y_deg": 0, "z_deg": 0},
+      "scores": {
+        "orientation_strength": {"value": 0.85, "framework": "Anisotropy & layer-adhesion mechanics", "evidence": "Z layers perpendicular to XY load"},
+        "support_cost": {"value": 0.55, "framework": "Overhang/bridging 45-degree rule", "evidence": "70° overhang requires support"},
+        "surface_finish": {"value": 0.70, "framework": "DfAM + Process-parameter mapping", "evidence": "Top surface in XY; side surfaces show layer lines"},
+        "printability": {"value": 0.80, "framework": "Process-parameter mapping per polymer class", "evidence": "PETG on heated bed"},
+        "parameter_confidence": {"value": 0.60, "framework": "Taguchi DOE", "evidence": "Default PETG profile"}
+      },
+      "aggregate": 0.71
+    },
+    {
+      "name": "X-up on edge",
+      "rotation": {"x_deg": 90, "y_deg": 0, "z_deg": 0},
+      "scores": {
+        "orientation_strength": {"value": 0.40, "framework": "Anisotropy & layer-adhesion mechanics", "evidence": "Z load crosses layers"},
+        "support_cost": {"value": 0.30, "framework": "Overhang/bridging 45-degree rule", "evidence": "More surfaces need support"},
+        "surface_finish": {"value": 0.55, "framework": "DfAM + Process-parameter mapping", "evidence": "Layer lines on visible sides"},
+        "printability": {"value": 0.60, "framework": "Process-parameter mapping per polymer class", "evidence": "Taller print, higher warp risk"},
+        "parameter_confidence": {"value": 0.50, "framework": "Taguchi DOE", "evidence": "Less common orientation"}
+      },
+      "aggregate": 0.44
+    }
+  ],
+  "recommended_candidate": "Z-up flat",
+  "weights": {
+    "orientation_strength": 0.30,
+    "support_cost": 0.25,
+    "surface_finish": 0.20,
+    "printability": 0.15,
+    "parameter_confidence": 0.10
+  },
+  "parameter_recommendations": {
+    "layer_height_mm": 0.20,
+    "wall_count": 3,
+    "top_bottom_layers": 4,
+    "infill_percent": 40,
+    "infill_pattern": "gyroid",
+    "nozzle_temp_c": 240,
+    "bed_temp_c": 80,
+    "fan_speed_percent": 40,
+    "print_speed_mm_s": 50,
+    "support_threshold_deg": 50,
+    "support_density_percent": 15,
+    "support_interface": true,
+    "retraction_distance_mm": 1.5,
+    "retraction_speed_mm_s": 35,
+    "special_notes": ["Dry PETG before printing"]
+  },
+  "scope_disclaimer": null,
+  "evidence_links": [
+    {"claim": "PETG warps with high cooling", "source": "Prusa PETG guide", "tier": 4, "url": "https://help.prusa3d.com/article/petg_1159"}
+  ]
+}

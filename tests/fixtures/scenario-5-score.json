@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "candidates": [
+    {
+      "name": "XY-flat with 30° tie-in",
+      "rotation": {"x_deg": 0, "y_deg": 0, "z_deg": 30},
+      "scores": {
+        "orientation_strength": {"value": 0.75, "framework": "Anisotropy & layer-adhesion mechanics", "evidence": "XY load aligned with scan tracks"},
+        "support_cost": {"value": 0.50, "framework": "Overhang/bridging 45-degree rule", "evidence": "35° and 50° overhangs need anchors"},
+        "surface_finish": {"value": 0.55, "framework": "DfAM + Process-parameter mapping", "evidence": "Downskin roughness expected"},
+        "printability": {"value": 0.50, "framework": "Process-parameter mapping per metal class", "evidence": "Thin walls and residual stress risk"},
+        "parameter_confidence": {"value": 0.40, "framework": "Taguchi DOE", "evidence": "No part-specific DOE yet"}
+      },
+      "aggregate": 0.56
+    }
+  ],
+  "recommended_candidate": "XY-flat with 30° tie-in",
+  "weights": {"orientation_strength": 0.35, "support_cost": 0.20, "surface_finish": 0.10, "printability": 0.20, "parameter_confidence": 0.15},
+  "parameter_recommendations": {
+    "layer_height_um": 30,
+    "laser_power_w": 280,
+    "scan_speed_mm_s": 800,
+    "hatch_spacing_um": 120,
+    "scan_strategy": "stripe with 67° rotation between layers",
+    "support_threshold_deg": 40,
+    "support_density_percent": 40,
+    "preheat_temp_c": 200,
+    "inert_gas": "Argon",
+    "special_notes": ["Stress-relief heat treatment 650 °C / 2 h", "HIP recommended for fatigue-critical regions"]
+  },
+  "scope_disclaimer": "Flight-critical aerospace part: this recommendation is for preliminary orientation only. A qualified engineer must validate fatigue life, heat treatment, and NDT before production.",
+  "evidence_links": [
+    {"claim": "DMLS residual stress controlled by scan strategy and heat treatment", "source": "DebRoy et al. residual stress review", "tier": 2},
+    {"claim": "EOS Ti64 recommended parameters", "source": "EOS DMLS guide", "tier": 4}
+  ]
+}

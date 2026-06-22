@@ -1,0 +1,183 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://3d-printing-process-optimizer/schemas/scoring-schema.json",
+  "title": "3D Printing Process Optimizer Shared Scoring Schema",
+  "description": "Shared JSON schemas for EvaluationFrame, ScoreCard, FailureDiagnosis, and Roadmap. Sibling skills in the science-industry cluster may import and extend these schemas.",
+  "definitions": {
+    "EvidenceLink": {
+      "type": "object",
+      "properties": {
+        "claim": {"type": "string"},
+        "source": {"type": "string"},
+        "tier": {"type": "integer", "minimum": 1, "maximum": 5},
+        "url": {"type": "string", "format": "uri"}
+      },
+      "required": ["claim", "source"]
+    },
+    "EvaluationFrame": {
+      "type": "object",
+      "properties": {
+        "status": {"enum": ["ok", "needs_input", "out_of_scope"]},
+        "process": {"enum": ["FDM", "SLA", "SLS", "DMLS", "LPBF", "MJF", "EBM", "unknown"]},
+        "supported": {"type": "boolean"},
+        "material_class": {"type": "string"},
+        "geometry_summary": {
+          "type": "object",
+          "properties": {
+            "max_dimensions_mm": {"type": "array", "items": {"type": "number"}, "minItems": 3, "maxItems": 3},
+            "overhang_angles_deg": {"type": "array", "items": {"type": "number"}},
+            "bridges_mm": {"type": "array", "items": {"type": "number"}},
+            "thin_walls_mm": {"type": "array", "items": {"type": "number"}},
+            "load_direction": {"enum": ["x", "y", "z", "mixed", "unknown"]},
+            "critical_surfaces": {"type": "array", "items": {"type": "string"}},
+            "warp_risk": {"enum": ["low", "medium", "high"]}
+          }
+        },
+        "target_properties": {
+          "type": "object",
+          "properties": {
+            "strength_direction": {"enum": ["z", "xy", "isotropic", null]},
+            "surface_finish": {"enum": ["smooth", "functional", "rough", null]},
+            "dimensional_accuracy": {"enum": ["tight", "standard", "loose", null]},
+            "print_time": {"enum": ["fast", "standard", "slow_ok", null]},
+            "cost": {"enum": ["low", "standard", null]}
+          }
+        },
+        "printer_constraints": {"type": "object"},
+        "failure_symptoms": {"type": "array", "items": {"type": "string"}},
+        "dominant_framework": {"type": ["string", "null"]},
+        "secondary_frameworks": {"type": "array", "items": {"type": "string"}},
+        "missing_inputs": {"type": "array", "items": {"type": "string"}},
+        "evidence_links": {"type": "array", "items": {"$ref": "#/definitions/EvidenceLink"}},
+        "confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0}
+      },
+      "required": ["status", "process", "supported", "material_class", "geometry_summary", "target_properties", "dominant_framework", "secondary_frameworks", "evidence_links", "confidence"]
+    },
+    "DimensionScore": {
+      "type": "object",
+      "properties": {
+        "value": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+        "framework": {"type": "string"},
+        "evidence": {"type": "string"}
+      },
+      "required": ["value", "framework", "evidence"]
+    },
+    "ScoreCard": {
+      "type": "object",
+      "properties": {
+        "status": {"enum": ["ok", "unsupported", "needs_input"]},
+        "candidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "rotation": {"type": "object"},
+              "scores": {
+                "type": "object",
+                "properties": {
+                  "orientation_strength": {"$ref": "#/definitions/DimensionScore"},
+                  "support_cost": {"$ref": "#/definitions/DimensionScore"},
+                  "surface_finish": {"$ref": "#/definitions/DimensionScore"},
+                  "printability": {"$ref": "#/definitions/DimensionScore"},
+                  "parameter_confidence": {"$ref": "#/definitions/DimensionScore"}
+                },
+                "required": ["orientation_strength", "support_cost", "surface_finish", "printability", "parameter_confidence"]
+              },
+              "aggregate": {"type": "number"}
+            },
+            "required": ["name", "rotation", "scores", "aggregate"]
+          }
+        },
+        "recommended_candidate": {"type": ["string", "null"]},
+        "weights": {"type": "object"},
+        "parameter_recommendations": {"type": "object"},
+        "scope_disclaimer": {"type": ["string", "null"]},
+        "evidence_links": {"type": "array", "items": {"$ref": "#/definitions/EvidenceLink"}}
+      },
+      "required": ["status", "candidates", "recommended_candidate", "weights", "parameter_recommendations", "scope_disclaimer", "evidence_links"]
+    },
+    "FailureDiagnosis": {
+      "type": "object",
+      "properties": {
+        "status": {"enum": ["ok", "no_symptoms", "needs_input"]},
+        "symptoms": {"type": "array", "items": {"type": "string"}},
+        "matched_failure_modes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "symptom": {"type": "string"},
+              "mode": {"type": "string"},
+              "mechanism": {"type": "string"},
+              "framework": {"type": "string"},
+              "evidence_tier": {"type": "integer", "minimum": 1, "maximum": 5},
+              "sources": {"type": "array", "items": {"type": "string"}}
+            },
+            "required": ["symptom", "mode", "mechanism", "framework", "evidence_tier", "sources"]
+          }
+        },
+        "parameter_adjustments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {"type": "string"},
+              "parameter": {"type": "string"},
+              "current": {},
+              "recommended": {},
+              "delta": {"type": "string"},
+              "rationale": {"type": "string"},
+              "framework": {"type": "string"},
+              "confidence": {"enum": ["high", "medium", "low"]},
+              "failure_mode": {"type": "string"},
+              "side_effects": {"type": "array", "items": {"type": "string"}}
+            },
+            "required": ["id", "parameter", "rationale", "framework", "confidence"]
+          }
+        },
+        "unmapped_symptoms": {"type": "array", "items": {"type": "string"}},
+        "evidence_links": {"type": "array", "items": {"$ref": "#/definitions/EvidenceLink"}},
+        "confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0}
+      },
+      "required": ["status", "symptoms", "matched_failure_modes", "parameter_adjustments", "unmapped_symptoms", "evidence_links", "confidence"]
+    },
+    "Roadmap": {
+      "type": "object",
+      "properties": {
+        "status": {"enum": ["ok", "needs_input"]},
+        "final_orientation": {"type": ["object", "null"]},
+        "support_strategy": {"type": ["object", "null"]},
+        "parameter_set": {"type": ["object", "null"]},
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {"type": "string"},
+              "action": {"type": "string"},
+              "effort": {"enum": ["Low", "Medium", "High"]},
+              "impact": {"enum": ["Low", "Medium", "High"]},
+              "priority": {"type": "integer", "minimum": 1, "maximum": 9},
+              "framework": {"type": "string"},
+              "verification": {"type": "string"}
+            },
+            "required": ["id", "action", "effort", "impact", "priority", "framework", "verification"]
+          }
+        },
+        "test_print_plan": {"type": ["object", "null"]},
+        "overall_effort": {"enum": ["Low", "Medium", "High"]},
+        "overall_impact": {"enum": ["Low", "Medium", "High"]},
+        "evidence_links": {"type": "array", "items": {"$ref": "#/definitions/EvidenceLink"}}
+      },
+      "required": ["status", "final_orientation", "support_strategy", "parameter_set", "actions", "test_print_plan", "overall_effort", "overall_impact", "evidence_links"]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "EvaluationFrame": {"$ref": "#/definitions/EvaluationFrame"},
+    "ScoreCard": {"$ref": "#/definitions/ScoreCard"},
+    "FailureDiagnosis": {"$ref": "#/definitions/FailureDiagnosis"},
+    "Roadmap": {"$ref": "#/definitions/Roadmap"}
+  }
+}

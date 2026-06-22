@@ -1,0 +1,67 @@
+{
+  "status": "ok",
+  "final_orientation": {
+    "name": "XY-flat with 30° tie-in",
+    "rotation": {"x_deg": 0, "y_deg": 0, "z_deg": 30},
+    "rationale": "Aligns primary load with strong XY scan tracks; 30° tie-in balances support access and residual stress.",
+    "framework": "Anisotropy & layer-adhesion mechanics"
+  },
+  "support_strategy": {
+    "threshold_deg": 40,
+    "density_percent": 40,
+    "interface": true,
+    "removal_plan": "Wire-EDM or CNC machining to remove anchors; plan datum surfaces.",
+    "framework": "Overhang/bridging 45-degree rule"
+  },
+  "parameter_set": {
+    "layer_height_um": 30,
+    "laser_power_w": 280,
+    "scan_speed_mm_s": 800,
+    "hatch_spacing_um": 120,
+    "scan_strategy": "stripe with 67° rotation between layers",
+    "preheat_temp_c": 200,
+    "inert_gas": "Argon",
+    "special_notes": ["Stress-relief 650 °C / 2 h", "HIP for fatigue-critical regions"]
+  },
+  "actions": [
+    {
+      "id": "S5-A1",
+      "action": "Build Taguchi DOE matrix: laser power × scan speed × hatch spacing",
+      "effort": "High",
+      "impact": "High",
+      "priority": 9,
+      "framework": "Taguchi DOE",
+      "verification": "Select parameter set maximizing density and minimizing residual stress SN ratio"
+    },
+    {
+      "id": "S5-A2",
+      "action": "Perform stress-relief heat treatment and HIP on all fatigue-critical builds",
+      "effort": "High",
+      "impact": "High",
+      "priority": 9,
+      "framework": "Process-parameter mapping per metal class",
+      "verification": "Residual stress < 100 MPa via hole-drilling or XRD"
+    },
+    {
+      "id": "S5-A3",
+      "action": "Obtain qualified engineer review before flight-critical production",
+      "effort": "Medium",
+      "impact": "High",
+      "priority": 6,
+      "framework": "ISO/ASTM 52900",
+      "verification": "Signed design review and NDT plan"
+    }
+  ],
+  "test_print_plan": {
+    "model": "Stress-relief test coupon with similar wall thickness and overhangs",
+    "measurements": ["residual stress", "density", "surface roughness Ra", " dimensional accuracy"],
+    "acceptance": {"residual_stress_mpa": 100, "density_percent": 99.5, "surface_roughness_ra_um": 15, "dimensional_error_percent": 0.3},
+    "fallback": "If residual stress > 100 MPa, reduce scan speed and increase preheat; re-run DOE"
+  },
+  "overall_effort": "High",
+  "overall_impact": "High",
+  "evidence_links": [
+    {"claim": "DMLS residual stress managed by scan strategy and heat treatment", "source": "DebRoy et al. residual stress review", "tier": 2},
+    {"claim": "HIP improves fatigue life of Ti64 DMLS", "source": "EOS DMLS guide", "tier": 4}
+  ]
+}

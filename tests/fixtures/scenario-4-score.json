@@ -1,0 +1,9 @@
+{
+  "status": "needs_input",
+  "candidates": [],
+  "recommended_candidate": null,
+  "weights": {},
+  "parameter_recommendations": {},
+  "scope_disclaimer": "Cannot score candidates until process and material are confirmed. Once confirmed, use the appropriate framework map (SLA: DfAM + process-parameter mapping; FDM: anisotropy + overhang rule).",
+  "evidence_links": []
+}

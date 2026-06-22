@@ -1,0 +1,9 @@
+{
+  "status": "no_symptoms",
+  "symptoms": [],
+  "matched_failure_modes": [],
+  "parameter_adjustments": [],
+  "unmapped_symptoms": [],
+  "evidence_links": [],
+  "confidence": 0.80
+}

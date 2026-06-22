@@ -1,0 +1,69 @@
+{
+  "status": "ok",
+  "final_orientation": {
+    "name": "Z-up flat",
+    "rotation": {"x_deg": 0, "y_deg": 0, "z_deg": 0},
+    "rationale": "Flat base maximizes bed contact; brim and bed temp address warp.",
+    "framework": "Process-parameter mapping per polymer class"
+  },
+  "support_strategy": {
+    "threshold_deg": 50,
+    "density_percent": 0,
+    "interface": false,
+    "removal_plan": "No supports required.",
+    "framework": "Overhang/bridging 45-degree rule"
+  },
+  "parameter_set": {
+    "layer_height_mm": 0.20,
+    "wall_count": 3,
+    "top_bottom_layers": 4,
+    "infill_percent": 20,
+    "nozzle_temp_c": 240,
+    "bed_temp_c": 85,
+    "fan_speed_percent": 30,
+    "print_speed_mm_s": 45,
+    "retraction_distance_mm": 1.5,
+    "retraction_speed_mm_s": 35,
+    "special_notes": ["8 mm brim", "First 5 layers fan at 30%", "Dry PETG"]
+  },
+  "actions": [
+    {
+      "id": "S3-A1",
+      "action": "Raise bed temp to 85 °C and reduce first-layer fan to 30%",
+      "effort": "Low",
+      "impact": "High",
+      "priority": 3,
+      "framework": "Process-parameter mapping per polymer class",
+      "verification": "No corner lift in first 20 mm of print"
+    },
+    {
+      "id": "S3-A2",
+      "action": "Add 8 mm brim and dry PETG before printing",
+      "effort": "Low",
+      "impact": "High",
+      "priority": 3,
+      "framework": "Process-parameter mapping per polymer class",
+      "verification": "Corners remain adhered through full print"
+    },
+    {
+      "id": "S3-A3",
+      "action": "Run DOE on bed temp × fan speed to minimize warp",
+      "effort": "High",
+      "impact": "Medium",
+      "priority": 6,
+      "framework": "Taguchi DOE",
+      "verification": "Maximize SN ratio for minimum corner lift"
+    }
+  ],
+  "test_print_plan": {
+    "model": "Full base plate or 50% scaled coupon",
+    "measurements": ["corner lift", "first-layer adhesion", "visual warp"],
+    "acceptance": {"corner_lift_mm": 0.2, "first_layer_width_variation_percent": 5},
+    "fallback": "If corner lift > 0.2 mm, add enclosure and reduce fan further to 0% for first 3 layers"
+  },
+  "overall_effort": "Medium",
+  "overall_impact": "High",
+  "evidence_links": [
+    {"claim": "PETG bed temp 85 °C reduces warping", "source": "Prusa PETG guide", "tier": 4, "url": "https://help.prusa3d.com/article/petg_1159"}
+  ]
+}

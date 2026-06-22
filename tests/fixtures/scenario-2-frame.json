@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "process": "FDM",
+  "supported": true,
+  "material_class": "PLA",
+  "geometry_summary": {
+    "max_dimensions_mm": [100, 80, 40],
+    "overhang_angles_deg": [70],
+    "bridges_mm": [12],
+    "thin_walls_mm": [],
+    "load_direction": "unknown",
+    "critical_surfaces": ["functional outer walls"],
+    "warp_risk": "low"
+  },
+  "target_properties": {
+    "strength_direction": null,
+    "surface_finish": "functional",
+    "dimensional_accuracy": null,
+    "print_time": null,
+    "cost": null
+  },
+  "printer_constraints": {},
+  "failure_symptoms": [],
+  "dominant_framework": "Overhang/bridging 45-degree rule",
+  "secondary_frameworks": ["DfAM", "Process-parameter mapping per polymer class"],
+  "missing_inputs": [],
+  "evidence_links": [
+    {"claim": "70° overhang exceeds self-supporting limit", "source": "Overhang/bridging 45-degree rule", "tier": 5},
+    {"claim": "PLA prints with low warp on heated bed", "source": "Process-parameter mapping per polymer class", "tier": 4}
+  ],
+  "confidence": 0.80
+}

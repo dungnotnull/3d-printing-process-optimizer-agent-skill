@@ -1,0 +1,78 @@
+{
+  "status": "ok",
+  "symptoms": ["stringing", "poor_surface"],
+  "matched_failure_modes": [
+    {
+      "symptom": "stringing",
+      "mode": "oozing_between_moves",
+      "mechanism": "Molten filament oozes during non-print moves due to insufficient retraction or excessive temperature.",
+      "framework": "Process-parameter mapping per polymer class",
+      "evidence_tier": 4,
+      "sources": ["Prusa PLA guide"]
+    },
+    {
+      "symptom": "poor_surface",
+      "mode": "top_surface_ironing_deficiency",
+      "mechanism": "Top surface roughness from insufficient top layers, ironing, or cooling.",
+      "framework": "Process-parameter mapping per polymer class",
+      "evidence_tier": 4,
+      "sources": ["Slic3r/PrusaSlicer docs"]
+    }
+  ],
+  "parameter_adjustments": [
+    {
+      "id": "S6-ADJ1",
+      "parameter": "retraction_distance_mm",
+      "current": 0.6,
+      "recommended": 1.0,
+      "delta": "+0.4",
+      "rationale": "Insufficient retraction allows ooze; PLA tolerates 1 mm retraction without clogging.",
+      "framework": "Process-parameter mapping per polymer class",
+      "confidence": "high",
+      "failure_mode": "oozing_between_moves",
+      "side_effects": ["Slightly longer print time"]
+    },
+    {
+      "id": "S6-ADJ2",
+      "parameter": "retraction_speed_mm_s",
+      "current": 25,
+      "recommended": 45,
+      "delta": "+20",
+      "rationale": "Faster retraction retracts filament before ooze occurs.",
+      "framework": "Process-parameter mapping per polymer class",
+      "confidence": "high",
+      "failure_mode": "oozing_between_moves",
+      "side_effects": ["Possible filament grinding if too aggressive"]
+    },
+    {
+      "id": "S6-ADJ3",
+      "parameter": "nozzle_temp_c",
+      "current": 215,
+      "recommended": 205,
+      "delta": "-10",
+      "rationale": "Lower temperature reduces oozing and improves top surface finish.",
+      "framework": "Process-parameter mapping per polymer class",
+      "confidence": "medium",
+      "failure_mode": "oozing_between_moves",
+      "side_effects": ["May reduce layer adhesion marginally"]
+    },
+    {
+      "id": "S6-ADJ4",
+      "parameter": "top_bottom_layers",
+      "current": 3,
+      "recommended": 5,
+      "delta": "+2",
+      "rationale": "More solid top layers hide infill pattern and improve surface finish.",
+      "framework": "Process-parameter mapping per polymer class",
+      "confidence": "medium",
+      "failure_mode": "top_surface_ironing_deficiency",
+      "side_effects": ["More material and time"]
+    }
+  ],
+  "unmapped_symptoms": [],
+  "evidence_links": [
+    {"claim": "PLA stringing fixed by retraction speed/distance", "source": "Prusa PLA guide", "tier": 4},
+    {"claim": "Top surface finish improves with more top layers", "source": "Slic3r/PrusaSlicer docs", "tier": 4}
+  ],
+  "confidence": 0.80
+}

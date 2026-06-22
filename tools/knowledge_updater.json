@@ -1,0 +1,13 @@
+{
+  "brain": "../SECOND-KNOWLEDGE-BRAIN.md",
+  "arxiv_categories": ["cond-mat.mtrl-sci", "physics.app-ph"],
+  "search_queries": [
+    "additive manufacturing process parameter optimization",
+    "FDM layer adhesion anisotropy",
+    "support structure generation overhang",
+    "design for additive manufacturing DfAM"
+  ],
+  "domains": ["astm.org", "iso.org", "all3dp.com"],
+  "max_results": 15,
+  "max_age_days": 730
+}

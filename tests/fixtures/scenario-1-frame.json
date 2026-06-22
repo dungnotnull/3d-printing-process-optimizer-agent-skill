@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "process": "FDM",
+  "supported": true,
+  "material_class": "PETG",
+  "geometry_summary": {
+    "max_dimensions_mm": [80, 40, 20],
+    "overhang_angles_deg": [70],
+    "bridges_mm": [],
+    "thin_walls_mm": [],
+    "load_direction": "z",
+    "critical_surfaces": [],
+    "warp_risk": "medium"
+  },
+  "target_properties": {
+    "strength_direction": "z",
+    "surface_finish": null,
+    "dimensional_accuracy": null,
+    "print_time": null,
+    "cost": null
+  },
+  "printer_constraints": {},
+  "failure_symptoms": [],
+  "dominant_framework": "Anisotropy & layer-adhesion mechanics",
+  "secondary_frameworks": ["DfAM", "Overhang/bridging 45-degree rule", "Process-parameter mapping per polymer class"],
+  "missing_inputs": ["printer constraints", "support removal capability"],
+  "evidence_links": [
+    {"claim": "PETG is FDM thermoplastic", "source": "ISO/ASTM 52900", "tier": 3},
+    {"claim": "70° overhang exceeds 45° rule", "source": "Overhang/bridging 45-degree rule", "tier": 5}
+  ],
+  "confidence": 0.75
+}

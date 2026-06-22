@@ -1,0 +1,34 @@
+{
+  "status": "needs_input",
+  "process": "unknown",
+  "supported": false,
+  "material_class": "unknown",
+  "geometry_summary": {
+    "max_dimensions_mm": [60, 60, 30],
+    "overhang_angles_deg": [],
+    "bridges_mm": [],
+    "thin_walls_mm": [],
+    "load_direction": "unknown",
+    "critical_surfaces": ["top curved visible surface"],
+    "warp_risk": "low"
+  },
+  "target_properties": {
+    "strength_direction": null,
+    "surface_finish": "smooth",
+    "dimensional_accuracy": null,
+    "print_time": null,
+    "cost": null
+  },
+  "printer_constraints": {},
+  "failure_symptoms": [],
+  "dominant_framework": null,
+  "secondary_frameworks": [],
+  "missing_inputs": ["process", "material", "budget/volume constraints"],
+  "evidence_links": [],
+  "questions": [
+    "Do you need the part in a specific material (e.g., resin vs thermoplastic) or is process open?",
+    "What is your target layer height / surface roughness (e.g., Ra < 25 µm)?",
+    "Do you have access to SLA/DLP or only FDM?"
+  ],
+  "confidence": 0.30
+}

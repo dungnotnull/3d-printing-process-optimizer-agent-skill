@@ -1,0 +1,70 @@
+{
+  "status": "ok",
+  "final_orientation": {
+    "name": "Z-up flat",
+    "rotation": {"x_deg": 0, "y_deg": 0, "z_deg": 0},
+    "rationale": "Keeps top surface in XY plane and preserves existing orientation; parameters fix symptoms.",
+    "framework": "DfAM"
+  },
+  "support_strategy": {
+    "threshold_deg": 50,
+    "density_percent": 0,
+    "interface": false,
+    "removal_plan": "No supports required.",
+    "framework": "Overhang/bridging 45-degree rule"
+  },
+  "parameter_set": {
+    "layer_height_mm": 0.20,
+    "wall_count": 3,
+    "top_bottom_layers": 5,
+    "infill_percent": 20,
+    "nozzle_temp_c": 205,
+    "bed_temp_c": 60,
+    "fan_speed_percent": 100,
+    "print_speed_mm_s": 50,
+    "retraction_distance_mm": 1.0,
+    "retraction_speed_mm_s": 45,
+    "special_notes": ["Dry PLA if open storage", "Enable ironing for top surface if slicer supports"]
+  },
+  "actions": [
+    {
+      "id": "S6-A1",
+      "action": "Increase retraction distance to 1.0 mm and speed to 45 mm/s",
+      "effort": "Low",
+      "impact": "High",
+      "priority": 3,
+      "framework": "Process-parameter mapping per polymer class",
+      "verification": "Stringing between test towers eliminated"
+    },
+    {
+      "id": "S6-A2",
+      "action": "Lower nozzle temp to 205 °C and increase top layers to 5",
+      "effort": "Low",
+      "impact": "High",
+      "priority": 3,
+      "framework": "Process-parameter mapping per polymer class",
+      "verification": "Top surface Ra < 50 µm and no infill show-through"
+    },
+    {
+      "id": "S6-A3",
+      "action": "Dry filament and verify extruder idler tension",
+      "effort": "Low",
+      "impact": "Medium",
+      "priority": 2,
+      "framework": "Process-parameter mapping per polymer class",
+      "verification": "No steam bubbles or inconsistent extrusion in first layer"
+    }
+  ],
+  "test_print_plan": {
+    "model": "Stringing test tower + flat top surface coupon",
+    "measurements": ["stringing strands", "top surface roughness", "first layer quality"],
+    "acceptance": {"stringing_count": 0, "top_surface_ra_um": 50},
+    "fallback": "If stringing persists, reduce temp further to 200 °C and check for partial nozzle clog"
+  },
+  "overall_effort": "Low",
+  "overall_impact": "High",
+  "evidence_links": [
+    {"claim": "PLA stringing fixed by retraction", "source": "Prusa PLA guide", "tier": 4},
+    {"claim": "Top surface improved by more top layers", "source": "Slic3r/PrusaSlicer docs", "tier": 4}
+  ]
+}
